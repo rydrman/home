@@ -1,0 +1,7 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Ryan Bottriell
+	email = ryanbottriell@live.ca
+[alias]
+	co = checkout
+	st = status
