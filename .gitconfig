@@ -5,3 +5,4 @@
 [alias]
 	co = checkout
 	st = status
+	clear = !git checkout master && git pull

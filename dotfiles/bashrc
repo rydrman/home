@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+# User environment
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+
+# User specific aliases and functions
+alias godev="cd ~/go/src/github.com/rydrman"
+
+export PATH=~/dotfiles/bin:$PATH
+
+# custom prompt
+source ~/dotfiles/bash_prompt
+
+eval $(ssh-agent) > /dev/null
+
+# bazel completion
+if [ -f /usr/local/lib/bazel/bin/bazel-complete.bash ]; then
+	source /usr/local/lib/bazel/bin/bazel-complete.bash
+fi
+
+# Key bindings, up/down arrow searches through history
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\eOA": history-search-backward'
+bind '"\eOB": history-search-forward'

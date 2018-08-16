@@ -1,0 +1,95 @@
+#!/usr/bin/bash
+
+reset_dec="\e[0m"
+dec_bold="\e[1m"
+dec_underline="\e[4m"
+
+reset_color="\e[39m"
+
+color_red="\e[38;5;160m"
+color_green="\e[38;5;114m"
+color_yellow="\e[38;5;226m"
+color_blue="\e[38;5;117m"
+color_magenta="\e[38;5;207m"
+color_cyan="\e[38;5;123m"
+color_light_gray="\e[38;5;251m"
+color_dark_gray="\e[38;5;244m"
+color_orange="\e[38;5;208m"
+
+reset_all="${reset_dec}${reset_color}"
+
+function nice_host {
+
+    echo "\h"
+
+}
+
+function colored_host {
+
+    if [ -n "${SSH_CLIENT+x}" ] || [ -n "${SSH_TTY+x}" ]; then
+        echo "${color_red}${dec_bold}$(nice_host)${reset_all}"
+    else
+        echo "${color_green}$(nice_host)${reset_all}"
+    fi
+
+}
+
+function colored_dir {
+
+    PWD=$(pwd)
+
+    go_dir=$GOPATH
+    if [[ $PWD == $go_dir* ]]; then
+
+        repl="${color_magenta}GO${reset_color}"
+
+        PWD=${PWD/$go_dir/$repl}
+
+        colored_bd="${color_yellow}bardel${reset_color}"
+        PWD=${PWD/src\/github.com\/bardel-tech/$colored_bd}
+
+        colored_ry="${color_yellow}rydrman${reset_color}"
+        PWD=${PWD/src\/github.com\/rydrman/$colored_ry}
+
+    elif [[ $PWD == $HOME* ]]; then
+
+        PWD=${PWD/$HOME/'~'}
+
+        echo "${color_orange}$PWD${reset_all}"
+        return
+
+    fi
+
+    echo "${color_yellow}${PWD}${reset_color}"
+
+}
+
+function colored_git {
+
+    if ! $(git rev-parse --is-inside-work-tree 2>/dev/null); then
+        return
+    fi
+
+    branch="$(git branch 2> /dev/null | grep -e "^*" | sed -E s/^\\*\ \(.*\)/\\1/)"
+
+    branch_color="$(git status -s 2> /dev/null | grep -qe "^\s*M" && echo "${color_red}" || echo "${color_green}")"
+
+    echo "${dec_underline}${dec_dim}git${reset_all}${dec_underline}@${branch_color}${branch}${reset_all}"
+
+}
+
+function colored_status {
+
+    status=$?
+    if [[ $status == 0 ]]; then
+        echo "${color_blue}OK${reset_all}"
+    else
+        echo "${color_red}[${status}]${reset_all}"
+    fi
+}
+
+function set_bash_prompt {
+    PS1=''"$(colored_status)\n\n$(colored_host):$(colored_dir) $(colored_git)\n> "''
+}
+
+export PROMPT_COMMAND=set_bash_prompt
