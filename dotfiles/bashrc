@@ -14,9 +14,9 @@ source ~/dotfiles/bash_prompt
 
 eval $(ssh-agent) > /dev/null
 
-# bazel completion
-if [ -f /usr/local/lib/bazel/bin/bazel-complete.bash ]; then
-	source /usr/local/lib/bazel/bin/bazel-complete.bash
+# bardel stuff
+if [ -f ~/dotfiles/bardel.sh ]; then
+	source ~/dotfiles/bardel.sh
 fi
 
 # Key bindings, up/down arrow searches through history

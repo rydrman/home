@@ -6,5 +6,5 @@
 	co = checkout
 	st = status
 	clear = !git checkout master && git pull
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+[url "ssh://git@github.com/bardel-tech"]
+  insteadOf = https://github.com/bardel-tech
