@@ -24,3 +24,5 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\eOA": history-search-backward'
 bind '"\eOB": history-search-forward'
+
+[[ -s /home/rbottriell/.autojump/etc/profile.d/autojump.sh ]] && source /home/rbottriell/.autojump/etc/profile.d/autojump.sh

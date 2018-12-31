@@ -89,7 +89,7 @@ function colored_status {
 }
 
 function set_bash_prompt {
-    PS1=''"$(colored_status)\n\n$(colored_host):$(colored_dir) $(colored_git)\n> "''
+    PS1=''"$(colored_status)\n\n$(colored_host):$(colored_dir) $(colored_git) $DEV_SHELL_ENV\n> "''
 }
 
-export PROMPT_COMMAND=set_bash_prompt
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}set_bash_prompt"
