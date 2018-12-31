@@ -14,11 +14,6 @@ source ~/dotfiles/bash_prompt
 
 eval $(ssh-agent) > /dev/null
 
-# bardel stuff
-if [ -f ~/dotfiles/bardel.sh ]; then
-	source ~/dotfiles/bardel.sh
-fi
-
 # Key bindings, up/down arrow searches through history
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
