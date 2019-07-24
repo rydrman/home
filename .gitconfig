@@ -5,8 +5,9 @@
 [alias]
 	co = checkout
 	st = status
+	ca = commit --amend
+	can = commit --ammend --no-edit
+	poh = push origin HEAD
 	clear = !git checkout master && git pull
-[url "ssh://git@github.com/bardel-tech"]
-  insteadOf = https://github.com/bardel-tech
 [core]
 	editor = /usr/bin/vim
